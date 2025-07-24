@@ -155,7 +155,7 @@
   </div>
 
   <script>
-    // 🎭 Set initial therapist-like avatar background
+    
     function setTherapistBackground() {
         const therapistIndex = Math.floor(Math.random() * 40) + 1;
         const therapistAvatar = `avatars/avatar_${therapistIndex}.png`;
@@ -211,17 +211,17 @@
       const userPrompt = { role: "user", content: messageText };
 
     try {
-      const res = await fetch("/api/chat", {
+      const res = await fetch("https://therapy-onh6.onrender.com/api/chat", {
         method: "POST",
         headers: {
         "Content-Type": "application/json"
-     },
+      },
         body: JSON.stringify({
         model: "gpt-3.5-turbo",
         messages: [systemPrompt, userPrompt],
         max_tokens: 150
-        })
-      });
+      })
+  });
 
         const data = await res.json();
         let reply = data.choices?.[0]?.message?.content?.trim() || "No response.";
@@ -233,9 +233,7 @@
         setTimeout(() => {
         chatLog.scrollTop = chatLog.scrollHeight;
         }, 50);
-
-
-        // 🎨 Update background based on speaker
+      
         const bgImage = currentBot === "A" ? bibiAvatar : bubbaAvatar;
         document.body.style.backgroundImage = `url('${bgImage}')`;
 
